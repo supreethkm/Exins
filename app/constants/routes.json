@@ -1,0 +1,8 @@
+{
+  "ADMIN": "/",
+  "FOOD_ISSUE": "/food-issue",
+  "INVENTORY": "/inventory",
+  "REPORTS": "/reports",
+  "DAY_BY_DAY_REPORT": "/day-by-day",
+  "MONTHLY_REPORT": "monthly"
+}
