@@ -4,8 +4,8 @@ import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 import { hot } from 'react-hot-loader/root';
 import type { Store } from '../reducers/types';
-import Routes from '../Routes';
-import Paperbase from '../components/Paperbase';
+import Routes from '../components/Routes';
+import Home from '../components/Home';
 
 type Props = {
   store: Store,
@@ -15,7 +15,7 @@ type Props = {
 const Root = ({ store, history }: Props) => (
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <Paperbase />
+      <Home />
     </ConnectedRouter>
   </Provider>
 );

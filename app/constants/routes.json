@@ -1,8 +1,10 @@
 {
-  "ADMIN": "/",
-  "FOOD_ISSUE": "/food-issue",
+  "ADMIN": "/admin",
+  "FOOD_SERVICE": "/food-service",
+  "FOOD_MENU" : "/food-service/menu",
+  "FOOD_SERVE" :"/food-service/serve",
   "INVENTORY": "/inventory",
   "REPORTS": "/reports",
-  "DAY_BY_DAY_REPORT": "/day-by-day",
-  "MONTHLY_REPORT": "monthly"
+  "DAILY_REPORT": "/reports/daily",
+  "MONTHLY_REPORT": "/reports/monthly"
 }

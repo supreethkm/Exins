@@ -12,7 +12,7 @@ import TreeView from '@material-ui/lab/TreeView';
 // eslint-disable-next-line import/no-unresolved
 import TreeItem from '@material-ui/lab/TreeItem';
 import Typography from '@material-ui/core/Typography';
-import MailIcon from '@material-ui/icons/Mail';
+import * as MatIcons from '@material-ui/icons';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Label from '@material-ui/icons/Label';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
@@ -21,7 +21,7 @@ import ForumIcon from '@material-ui/icons/Forum';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
-import MenuProps from '../../constants/navigation.props.json';
+import MenuProps from '../../constants/navigation.props';
 
 const useTreeItemStyles = makeStyles(theme => ({
   root: {
@@ -95,7 +95,11 @@ function StyledTreeItem(props) {
   if (isRootMenu) {
     itemLabel = baseLabel;
   } else {
-    itemLabel = <Link to={navPath}>{baseLabel}</Link>;
+    itemLabel = (
+      <Link style={{ color: 'inherit' }} to={navPath}>
+        {baseLabel}
+      </Link>
+    );
   }
   return (
     <TreeItem
@@ -147,7 +151,7 @@ const Menus = MenuProps.map((menu, id) => {
     <StyledTreeItem
       nodeId={menu.name}
       labelText={menu.name}
-      labelIcon={SupervisorAccountIcon}
+      labelIcon={MatIcons[menu.icon]}
       // labelInfo="90"
       color="#1a73e8"
       bgColor="#e8f0fe"
@@ -161,7 +165,7 @@ const Menus = MenuProps.map((menu, id) => {
             <StyledTreeItem
               nodeId={childMenu.name}
               labelText={childMenu.name}
-              labelIcon={SupervisorAccountIcon}
+              labelIcon={MatIcons[childMenu.icon]}
               // labelInfo="90"
               isRootMenu={false}
               color="#1a73e8"
@@ -187,7 +191,7 @@ export default function MenuTreeView() {
       defaultEndIcon={<div style={{ width: 24 }} />}
     >
       {Menus}
-     {/* <StyledTreeItem nodeId="1" labelText="All Mail" labelIcon={MailIcon} />
+      {/* <StyledTreeItem nodeId="1" labelText="All Mail" labelIcon={MailIcon} />
       <StyledTreeItem nodeId="2" labelText="Trash" labelIcon={DeleteIcon} />
       <StyledTreeItem nodeId="3" labelText="Categories" labelIcon={Label}>
         <StyledTreeItem

@@ -104,7 +104,7 @@ function Navigator(props) {
               primary: classes.itemPrimary
             }}
           >
-            Project Overview
+            Overview
           </ListItemText>
         </ListItem>
         <MenuTree></MenuTree>
