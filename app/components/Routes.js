@@ -2,6 +2,10 @@ import React from 'react';
 import { Switch, Route, Link } from 'react-router-dom';
 import routes from '../constants/routes.json';
 import App from '../containers/App';
+import Login from './Sign-In/SignIn';
+import SignUp from './Sign-Up/SignUp';
+import DailyReport from './Reports/Daily/Daily-Report';
+import MonthlyReport from './Reports/Monthly/Montly-Report';
 
 // Some folks find value in a centralized route config.
 // A route config is just data. React is great at mapping
@@ -13,11 +17,11 @@ import App from '../containers/App';
 const routesData = [
   {
     path: routes.ADMIN,
-    component: Sandwiches
+    component: Login
   },
   {
     path: routes.FOOD_MENU,
-    component: Cart
+    component: SignUp
   },
   {
     path: routes.FOOD_SERVE,
@@ -29,10 +33,22 @@ const routesData = [
   },
   {
     path: routes.DAILY_REPORT,
-    component: Cart
+    component: DailyReport
   },
   {
     path: routes.MONTHLY_REPORT,
+    component: MonthlyReport
+  },
+  {
+    path: routes.LOGIN,
+    component: Bus
+  },
+  {
+    path: routes.LOGOUT,
+    component: Bus
+  },
+  {
+    path: routes.NOT_FOUND_404,
     component: Bus
   }
   // {

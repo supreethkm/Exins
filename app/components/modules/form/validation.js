@@ -1,7 +1,8 @@
-import isEmail from 'validator/lib/isEmail';
+//import isEmail from 'validator/lib/isEmail';
 
 export function email(value) {
-  return value && !isEmail(value.trim()) ? 'Invalid email' : null;
+  //return value && !isEmail(value.trim()) ? 'Invalid email' : null;
+  return value;
 }
 
 function isDirty(value) {

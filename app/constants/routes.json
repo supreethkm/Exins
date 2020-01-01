@@ -6,5 +6,8 @@
   "INVENTORY": "/inventory",
   "REPORTS": "/reports",
   "DAILY_REPORT": "/reports/daily",
-  "MONTHLY_REPORT": "/reports/monthly"
+  "MONTHLY_REPORT": "/reports/monthly",
+  "LOGIN": "/login",
+  "LOGOUT": "/logout",
+  "NOT_FOUND_404": "not-found-404"
 }
