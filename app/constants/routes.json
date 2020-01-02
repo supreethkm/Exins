@@ -2,6 +2,7 @@
   "ADMIN": "/admin",
   "FOOD_SERVICE": "/food-service",
   "FOOD_MENU" : "/food-service/menu",
+  "NEW_MENU" : "/food-service/menu/new",
   "FOOD_SERVE" :"/food-service/serve",
   "INVENTORY": "/inventory",
   "REPORTS": "/reports",

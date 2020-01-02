@@ -14,7 +14,7 @@ export default [
       },
       {
         name: 'Supplier',
-        path: Routes.ADMIN,
+        path: Routes.NEW_MENU,
         icon: 'SupervisorAccount',
         childs: []
       },
