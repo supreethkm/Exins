@@ -107,7 +107,7 @@ function Navigator(props) {
             Overview
           </ListItemText>
         </ListItem>
-        <MenuTree></MenuTree>
+        <MenuTree />
         {/* {categories.map(({ id, children }) => (
           <React.Fragment key={id}>
             <ListItem className={classes.categoryHeader}>

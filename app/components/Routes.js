@@ -7,6 +7,8 @@ import SignUp from './Sign-Up/SignUp';
 import DailyReport from './Reports/Daily/Daily-Report';
 import MonthlyReport from './Reports/Monthly/Montly-Report';
 import NewMenu from './Menu/New-Menu';
+import MenuPage from './Menu/Menu';
+import NewInventory from './Inventory/New-Inventory.js';
 
 // Some folks find value in a centralized route config.
 // A route config is just data. React is great at mapping
@@ -26,7 +28,7 @@ const routesData = [
   },
   {
     path: routes.FOOD_MENU,
-    component: SignUp
+    component: MenuPage
   },
   {
     path: routes.FOOD_SERVE,
@@ -34,7 +36,7 @@ const routesData = [
   },
   {
     path: routes.INVENTORY,
-    component: NewMenu
+    component: NewInventory
   },
   {
     path: routes.DAILY_REPORT,

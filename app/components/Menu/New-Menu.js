@@ -10,8 +10,13 @@ import {
   Divider,
   Grid,
   Button,
-  TextField
+  TextField,
+  Checkbox,
+  FormGroup,
+  FormControlLabel,
+  FormLabel
 } from '@material-ui/core';
+import { compose } from 'redux';
 
 const useStyles = makeStyles(() => ({
   root: {}
@@ -28,13 +33,24 @@ const NewMenu = props => {
     email: 'shen.zhi@devias.io',
     phone: '',
     state: 'Alabama',
-    country: 'USA'
+    country: 'USA',
+    checkedB: 'true',
+    checkedB: 'false'
   });
 
   const handleChange = event => {
+    console.log('handleChange', event);
     setValues({
       ...values,
       [event.target.name]: event.target.value
+    });
+  };
+
+  const handleCheckboxChange = event => {
+    console.log('handleChange', event);
+    setValues({
+      ...values,
+      [event.target.name]: event.target.checked
     });
   };
 
@@ -52,33 +68,35 @@ const NewMenu = props => {
       label: 'San Francisco'
     }
   ];
-
   return (
     <Card {...rest} className={clsx(classes.root, className)}>
       <form autoComplete="off" noValidate>
-        <CardHeader subheader="The information can be edited" title="Profile" />
+        <CardHeader
+          subheader="The information will added to Menu"
+          title="Add item to Menu"
+        />
         <Divider />
         <CardContent>
           <Grid container spacing={3}>
             <Grid item md={6} xs={12}>
               <TextField
                 fullWidth
-                helperText="Please specify the first name"
-                label="First name"
+                helperText="Please specify the Item name"
+                label="Item name"
                 margin="dense"
-                name="firstName"
+                name="itemName"
                 onChange={handleChange}
                 required
-                value={values.firstName}
+                value={values.itemName}
                 variant="outlined"
               />
             </Grid>
             <Grid item md={6} xs={12}>
               <TextField
                 fullWidth
-                label="Last name"
+                label="Quantity per serve"
                 margin="dense"
-                name="lastName"
+                name="serveQuantity"
                 onChange={handleChange}
                 required
                 value={values.lastName}
@@ -86,61 +104,86 @@ const NewMenu = props => {
               />
             </Grid>
             <Grid item md={6} xs={12}>
-              <TextField
-                fullWidth
-                label="Email Address"
-                margin="dense"
-                name="email"
-                onChange={handleChange}
-                required
-                value={values.email}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid item md={6} xs={12}>
-              <TextField
-                fullWidth
-                label="Phone Number"
-                margin="dense"
-                name="phone"
-                onChange={handleChange}
-                type="number"
-                value={values.phone}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid item md={6} xs={12}>
-              <TextField
-                fullWidth
-                label="Select State"
-                margin="dense"
-                name="state"
-                onChange={handleChange}
-                required
-                select
-                // eslint-disable-next-line react/jsx-sort-props
-                SelectProps={{ native: true }}
-                value={values.state}
-                variant="outlined"
-              >
-                {states.map(option => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </TextField>
-            </Grid>
-            <Grid item md={6} xs={12}>
-              <TextField
-                fullWidth
-                label="Country"
-                margin="dense"
-                name="country"
-                onChange={handleChange}
-                required
-                value={values.country}
-                variant="outlined"
-              />
+              <FormLabel component="legend">Select Days</FormLabel>
+              <FormGroup>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={values.checkedA}
+                      onChange={handleCheckboxChange}
+                      value="true"
+                      color="primary"
+                    />
+                  }
+                  label="Sunday"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={values.checkedB}
+                      onChange={handleCheckboxChange}
+                      value="true"
+                      color="primary"
+                    />
+                  }
+                  label="Monday"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={values.checkedA}
+                      onChange={handleCheckboxChange}
+                      value="true"
+                      color="primary"
+                    />
+                  }
+                  label="Tuesday"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={values.checkedA}
+                      onChange={handleCheckboxChange}
+                      value="true"
+                      color="primary"
+                    />
+                  }
+                  label="Wednsday"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={values.checkedA}
+                      onChange={handleCheckboxChange}
+                      value="true"
+                      color="primary"
+                    />
+                  }
+                  label="Thursday"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={values.checkedA}
+                      onChange={handleCheckboxChange}
+                      value="true"
+                      color="primary"
+                    />
+                  }
+                  label="Friday"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={values.checkedA}
+                      onChange={handleCheckboxChange}
+                      value="true"
+                      color="primary"
+                    />
+                  }
+                  label="Saturday"
+                />
+              </FormGroup>
             </Grid>
           </Grid>
         </CardContent>
