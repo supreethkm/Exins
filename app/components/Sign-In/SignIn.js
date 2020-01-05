@@ -1,135 +1,307 @@
-// --- Post bootstrap -----
-import React from 'react';
-import { Field, Form, FormSpy } from 'react-final-form';
-import { makeStyles } from '@material-ui/core/styles';
-import Link from '@material-ui/core/Link';
-import withRoot from '../modules/withRoot';
-import Typography from '../modules/components/Typography';
-import AppFooter from '../modules/views/AppFooter';
-import AppAppBar from '../modules/views/AppAppBar';
-import AppForm from '../modules/views/AppForm';
-import { email, required } from '../modules/form/validation';
-import RFTextField from '../modules/form/RFTextField';
-import FormButton from '../modules/form/FormButton';
-import FormFeedback from '../modules/form/FormFeedback';
+import React, { useState, useEffect } from 'react';
+import { Link as RouterLink, withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { makeStyles } from '@material-ui/styles';
+import {
+  Grid,
+  Button,
+  IconButton,
+  TextField,
+  Link,
+  Typography
+} from '@material-ui/core';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+
+//import { Facebook as FacebookIcon, Google as GoogleIcon } from 'icons';
+import validate from 'validate.js';
+
+const schema = {
+  email: {
+    presence: { allowEmpty: false, message: 'is required' },
+    email: true,
+    length: {
+      maximum: 64
+    }
+  },
+  password: {
+    presence: { allowEmpty: false, message: 'is required' },
+    length: {
+      maximum: 128
+    }
+  }
+};
 
 const useStyles = makeStyles(theme => ({
-  form: {
-    marginTop: theme.spacing(6)
+  root: {
+    backgroundColor: theme.palette.background.default,
+    height: '100%'
   },
-  button: {
+  grid: {
+    height: '100%'
+  },
+  quoteContainer: {
+    [theme.breakpoints.down('md')]: {
+      display: 'none'
+    }
+  },
+  quote: {
+    backgroundColor: theme.palette.neutral,
+    height: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundImage: 'url(/images/auth.jpg)',
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center'
+  },
+  quoteInner: {
+    textAlign: 'center',
+    flexBasis: '600px'
+  },
+  quoteText: {
+    color: theme.palette.white,
+    fontWeight: 300
+  },
+  name: {
     marginTop: theme.spacing(3),
-    marginBottom: theme.spacing(2)
+    color: theme.palette.white
   },
-  feedback: {
+  bio: {
+    color: theme.palette.white
+  },
+  contentContainer: {},
+  content: {
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column'
+  },
+  contentHeader: {
+    display: 'flex',
+    alignItems: 'center',
+    paddingTop: theme.spacing(5),
+    paddingBototm: theme.spacing(2),
+    paddingLeft: theme.spacing(2),
+    paddingRight: theme.spacing(2)
+  },
+  logoImage: {
+    marginLeft: theme.spacing(4)
+  },
+  contentBody: {
+    flexGrow: 1,
+    display: 'flex',
+    alignItems: 'center',
+    [theme.breakpoints.down('md')]: {
+      justifyContent: 'center'
+    }
+  },
+  form: {
+    paddingLeft: 100,
+    paddingRight: 100,
+    paddingBottom: 125,
+    flexBasis: 700,
+    [theme.breakpoints.down('sm')]: {
+      paddingLeft: theme.spacing(2),
+      paddingRight: theme.spacing(2)
+    }
+  },
+  title: {
+    marginTop: theme.spacing(3)
+  },
+  socialButtons: {
+    marginTop: theme.spacing(3)
+  },
+  socialIcon: {
+    marginRight: theme.spacing(1)
+  },
+  sugestion: {
     marginTop: theme.spacing(2)
+  },
+  textField: {
+    marginTop: theme.spacing(2)
+  },
+  signInButton: {
+    margin: theme.spacing(2, 0)
   }
 }));
 
-function SignIn() {
+const SignIn = props => {
+  const { history } = props;
+
   const classes = useStyles();
-  const [sent, setSent] = React.useState(false);
 
-  const validate = values => {
-    const errors = required(['email', 'password'], values);
+  const [formState, setFormState] = useState({
+    isValid: false,
+    values: {},
+    touched: {},
+    errors: {}
+  });
 
-    if (!errors.email) {
-      const emailError = email(values.email, values);
-      if (emailError) {
-        errors.email = email(values.email, values);
+  useEffect(() => {
+    const errors = validate(formState.values, schema);
+
+    setFormState(formState => ({
+      ...formState,
+      isValid: !errors,
+      errors: errors || {}
+    }));
+  }, [formState.values]);
+
+  const handleBack = () => {
+    history.goBack();
+  };
+
+  const handleChange = event => {
+    event.persist();
+
+    setFormState(formState => ({
+      ...formState,
+      values: {
+        ...formState.values,
+        [event.target.name]:
+          event.target.type === 'checkbox'
+            ? event.target.checked
+            : event.target.value
+      },
+      touched: {
+        ...formState.touched,
+        [event.target.name]: true
       }
-    }
-
-    return errors;
+    }));
   };
 
-  const handleSubmit = () => {
-    setSent(true);
+  const handleSignIn = event => {
+    event.preventDefault();
+    history.push('/');
   };
+
+  const hasError = field =>
+    !!(formState.touched[field] && formState.errors[field]);
 
   return (
-    <>
-      <AppAppBar />
-      <AppForm>
-        <>
-          <Typography variant="h3" gutterBottom marked="center" align="center">
-            Sign In
-          </Typography>
-          <Typography variant="body2" align="center">
-            Not a member yet?
-            <Link
-              href="/premium-themes/onepirate/sign-up/"
-              align="center"
-              underline="always"
-            >
-              Sign Up here
-            </Link>
-          </Typography>
-        </>
-        <Form
-          onSubmit={handleSubmit}
-          subscription={{ submitting: true }}
-          validate={validate}
-        >
-          {({ handleSubmit2, submitting }) => (
-            <form onSubmit={handleSubmit2} className={classes.form} noValidate>
-              <Field
-                autoComplete="email"
-                autoFocus
-                component={RFTextField}
-                disabled={submitting || sent}
-                fullWidth
-                label="Email"
-                margin="normal"
-                name="email"
-                required
-                size="large"
-              />
-              <Field
-                fullWidth
-                size="large"
-                component={RFTextField}
-                disabled={submitting || sent}
-                required
-                name="password"
-                autoComplete="current-password"
-                label="Password"
-                type="password"
-                margin="normal"
-              />
-              <FormSpy subscription={{ submitError: true }}>
-                {({ submitError }) =>
-                  submitError ? (
-                    <FormFeedback className={classes.feedback} error>
-                      {submitError}
-                    </FormFeedback>
-                  ) : null
-                }
-              </FormSpy>
-              <FormButton
-                className={classes.button}
-                disabled={submitting || sent}
-                size="large"
-                color="secondary"
-                fullWidth
-              >
-                {submitting || sent ? 'In progress…' : 'Sign In'}
-              </FormButton>
-            </form>
-          )}
-        </Form>
-        <Typography align="center">
-          <Link
-            underline="always"
-            href="/premium-themes/onepirate/forgot-password/"
-          >
-            Forgot password?
-          </Link>
-        </Typography>
-      </AppForm>
-      <AppFooter />
-    </>
+    <div className={classes.root}>
+      <Grid className={classes.grid} container>
+        {/* <Grid className={classes.quoteContainer} item lg={5}>
+          <div className={classes.quote}>
+            <div className={classes.quoteInner}>
+              <Typography className={classes.quoteText} variant="h1">
+                Hella narwhal Cosby sweater McSweeney's, salvia kitsch before
+                they sold out High Life.
+              </Typography>
+              <div className={classes.person}>
+                <Typography className={classes.name} variant="body1">
+                  Takamaru Ayako
+                </Typography>
+                <Typography className={classes.bio} variant="body2">
+                  Manager at inVision
+                </Typography>
+              </div>
+            </div>
+          </div>
+        </Grid> */}
+        <Grid className={classes.content} item lg={7} xs={12}>
+          <div className={classes.content}>
+            <div className={classes.contentHeader}>
+              <IconButton onClick={handleBack}>
+                <ArrowBackIcon />
+              </IconButton>
+            </div>
+            <div className={classes.contentBody}>
+              <form className={classes.form} onSubmit={handleSignIn}>
+                <Typography className={classes.title} variant="h2">
+                  Sign in
+                </Typography>
+                {/* <Typography color="textSecondary" gutterBottom>
+                  Sign in with social media
+                </Typography>
+                <Grid className={classes.socialButtons} container spacing={2}>
+                  <Grid item>
+                    <Button
+                      color="primary"
+                      onClick={handleSignIn}
+                      size="large"
+                      variant="contained"
+                    >
+                      <FacebookIcon className={classes.socialIcon} />
+                      Login with Facebook
+                    </Button>
+                  </Grid>
+                  <Grid item>
+                    <Button
+                      onClick={handleSignIn}
+                      size="large"
+                      variant="contained"
+                    >
+                      <GoogleIcon className={classes.socialIcon} />
+                      Login with Google
+                    </Button>
+                  </Grid>
+                </Grid> */}
+                <Typography
+                  align="center"
+                  className={classes.sugestion}
+                  color="textSecondary"
+                  variant="body1"
+                >
+                  Login with email address
+                </Typography>
+                <TextField
+                  className={classes.textField}
+                  error={hasError('email')}
+                  fullWidth
+                  helperText={
+                    hasError('email') ? formState.errors.email[0] : null
+                  }
+                  label="Email address"
+                  name="email"
+                  onChange={handleChange}
+                  type="text"
+                  value={formState.values.email || ''}
+                  variant="outlined"
+                />
+                <TextField
+                  className={classes.textField}
+                  error={hasError('password')}
+                  fullWidth
+                  helperText={
+                    hasError('password') ? formState.errors.password[0] : null
+                  }
+                  label="Password"
+                  name="password"
+                  onChange={handleChange}
+                  type="password"
+                  value={formState.values.password || ''}
+                  variant="outlined"
+                />
+                <Button
+                  className={classes.signInButton}
+                  color="primary"
+                  disabled={!formState.isValid}
+                  fullWidth
+                  size="large"
+                  type="submit"
+                  variant="contained"
+                >
+                  Sign in now
+                </Button>
+                <Typography color="textSecondary" variant="body1">
+                  Don't have an account?{' '}
+                  <Link component={RouterLink} to="/sign-up" variant="h6">
+                    Sign up
+                  </Link>
+                </Typography>
+              </form>
+            </div>
+          </div>
+        </Grid>
+      </Grid>
+    </div>
   );
-}
+};
 
-export default withRoot(SignIn);
+SignIn.propTypes = {
+  history: PropTypes.object
+};
+
+//export default withRouter(SignIn);
+export default SignIn;

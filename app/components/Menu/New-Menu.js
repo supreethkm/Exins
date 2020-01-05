@@ -35,7 +35,7 @@ const NewMenu = props => {
     state: 'Alabama',
     country: 'USA',
     checkedB: 'true',
-    checkedB: 'false'
+    checkedA: 'false'
   });
 
   const handleChange = event => {
@@ -48,10 +48,10 @@ const NewMenu = props => {
 
   const handleCheckboxChange = event => {
     console.log('handleChange', event);
-    setValues({
-      ...values,
-      [event.target.name]: event.target.checked
-    });
+  //   setValues({
+  //     ...values,
+  //     [event.target.name]: event.target.checked
+  //   });
   };
 
   const states = [
@@ -87,7 +87,7 @@ const NewMenu = props => {
                 name="itemName"
                 onChange={handleChange}
                 required
-                value={values.itemName}
+                value={'values.itemName'}
                 variant="outlined"
               />
             </Grid>
@@ -99,7 +99,7 @@ const NewMenu = props => {
                 name="serveQuantity"
                 onChange={handleChange}
                 required
-                value={values.lastName}
+                value="values.lastName"
                 variant="outlined"
               />
             </Grid>
@@ -109,7 +109,6 @@ const NewMenu = props => {
                 <FormControlLabel
                   control={
                     <Checkbox
-                      checked={values.checkedA}
                       onChange={handleCheckboxChange}
                       value="true"
                       color="primary"
@@ -120,7 +119,6 @@ const NewMenu = props => {
                 <FormControlLabel
                   control={
                     <Checkbox
-                      checked={values.checkedB}
                       onChange={handleCheckboxChange}
                       value="true"
                       color="primary"
@@ -131,7 +129,6 @@ const NewMenu = props => {
                 <FormControlLabel
                   control={
                     <Checkbox
-                      checked={values.checkedA}
                       onChange={handleCheckboxChange}
                       value="true"
                       color="primary"
@@ -142,7 +139,6 @@ const NewMenu = props => {
                 <FormControlLabel
                   control={
                     <Checkbox
-                      checked={values.checkedA}
                       onChange={handleCheckboxChange}
                       value="true"
                       color="primary"
@@ -153,7 +149,6 @@ const NewMenu = props => {
                 <FormControlLabel
                   control={
                     <Checkbox
-                      checked={values.checkedA}
                       onChange={handleCheckboxChange}
                       value="true"
                       color="primary"
@@ -164,7 +159,6 @@ const NewMenu = props => {
                 <FormControlLabel
                   control={
                     <Checkbox
-                      checked={values.checkedA}
                       onChange={handleCheckboxChange}
                       value="true"
                       color="primary"
@@ -175,7 +169,6 @@ const NewMenu = props => {
                 <FormControlLabel
                   control={
                     <Checkbox
-                      checked={values.checkedA}
                       onChange={handleCheckboxChange}
                       value="true"
                       color="primary"
