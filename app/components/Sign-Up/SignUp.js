@@ -14,6 +14,10 @@ import {
 } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import validate from 'validate.js';
+import { CompareArrowsOutlined } from '@material-ui/icons';
+import createDB from '../../database/admin';
+
+createDB();
 
 const schema = {
   firstName: {
@@ -43,10 +47,7 @@ const schema = {
   },
   policy: {
     presence: { allowEmpty: false, message: 'is required' },
-    inclusion:{
-      within:[true],
-      message: 'is required'
-    }
+    checked: true
   }
 };
 
@@ -128,7 +129,7 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(3)
   },
   textField: {
-    marginTop: theme.spacing(2)
+    marginTop: theme.spacing(1)
   },
   policy: {
     marginTop: theme.spacing(1),
@@ -144,6 +145,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const SignUp = props => {
+  console.log('Signup Page');
   const { history } = props;
 
   const classes = useStyles();
@@ -226,7 +228,7 @@ const SignUp = props => {
             </div>
             <div className={classes.contentBody}>
               <form className={classes.form} onSubmit={handleSignUp}>
-                <Typography className={classes.title} variant="h2">
+                <Typography className={classes.title} variant="h4">
                   Create new account
                 </Typography>
                 <Typography color="textSecondary" gutterBottom>
@@ -245,6 +247,7 @@ const SignUp = props => {
                   type="text"
                   value={formState.values.firstName || ''}
                   variant="outlined"
+                  margin="dense"
                 />
                 <TextField
                   className={classes.textField}
@@ -259,6 +262,7 @@ const SignUp = props => {
                   type="text"
                   value={formState.values.lastName || ''}
                   variant="outlined"
+                  margin="dense"
                 />
                 <TextField
                   className={classes.textField}
@@ -273,6 +277,7 @@ const SignUp = props => {
                   type="text"
                   value={formState.values.email || ''}
                   variant="outlined"
+                  margin="dense"
                 />
                 <TextField
                   className={classes.textField}
@@ -287,6 +292,7 @@ const SignUp = props => {
                   type="password"
                   value={formState.values.password || ''}
                   variant="outlined"
+                  margin="dense"
                 />
                 <div className={classes.policy}>
                   <Checkbox
@@ -299,7 +305,7 @@ const SignUp = props => {
                   <Typography
                     className={classes.policyText}
                     color="textSecondary"
-                    variant="body1"
+                    variant="body2"
                   >
                     I have read the{' '}
                     <Link
@@ -307,7 +313,7 @@ const SignUp = props => {
                       component={RouterLink}
                       to="#"
                       underline="always"
-                      variant="h6"
+                      variant="body2"
                     >
                       Terms and Conditions
                     </Link>
@@ -329,9 +335,13 @@ const SignUp = props => {
                 >
                   Sign up now
                 </Button>
-                <Typography color="textSecondary" variant="body1">
+                <Typography color="textSecondary" variant="body2">
                   Have an account?{' '}
-                  <Link component={RouterLink} to="/sign-in" variant="h6">
+                  <Link
+                    component={RouterLink}
+                    to="/sign-in"
+                    variant="subtitle2"
+                  >
                     Sign in
                   </Link>
                 </Typography>
@@ -349,4 +359,4 @@ SignUp.propTypes = {
 };
 
 export default withRouter(SignUp);
-//export default SignUp;
+// export default SignUp;

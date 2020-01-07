@@ -18,6 +18,7 @@ import MenuBuilder from './menu';
 export default class AppUpdater {
   constructor() {
     log.transports.file.level = 'info';
+    console.log = log.log;
     autoUpdater.logger = log;
     autoUpdater.checkForUpdatesAndNotify();
   }

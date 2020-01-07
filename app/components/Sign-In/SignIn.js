@@ -12,7 +12,7 @@ import {
 } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
-//import { Facebook as FacebookIcon, Google as GoogleIcon } from 'icons';
+// import { Facebook as FacebookIcon, Google as GoogleIcon } from 'icons';
 import validate from 'validate.js';
 
 const schema = {
@@ -118,7 +118,7 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(2)
   },
   textField: {
-    marginTop: theme.spacing(2)
+    marginTop: theme.spacing(1)
   },
   signInButton: {
     margin: theme.spacing(2, 0)
@@ -208,7 +208,7 @@ const SignIn = props => {
             </div>
             <div className={classes.contentBody}>
               <form className={classes.form} onSubmit={handleSignIn}>
-                <Typography className={classes.title} variant="h2">
+                <Typography className={classes.title} variant="h4">
                   Sign in
                 </Typography>
                 {/* <Typography color="textSecondary" gutterBottom>
@@ -258,6 +258,7 @@ const SignIn = props => {
                   type="text"
                   value={formState.values.email || ''}
                   variant="outlined"
+                  margin="dense"
                 />
                 <TextField
                   className={classes.textField}
@@ -272,6 +273,7 @@ const SignIn = props => {
                   type="password"
                   value={formState.values.password || ''}
                   variant="outlined"
+                  margin="dense"
                 />
                 <Button
                   className={classes.signInButton}
@@ -281,12 +283,17 @@ const SignIn = props => {
                   size="large"
                   type="submit"
                   variant="contained"
+                  margin="dense"
                 >
                   Sign in now
                 </Button>
-                <Typography color="textSecondary" variant="body1">
+                <Typography color="textSecondary" variant="body2">
                   Don't have an account?{' '}
-                  <Link component={RouterLink} to="/sign-up" variant="h6">
+                  <Link
+                    component={RouterLink}
+                    to="/sign-up"
+                    variant="subtitle2"
+                  >
                     Sign up
                   </Link>
                 </Typography>
@@ -303,5 +310,5 @@ SignIn.propTypes = {
   history: PropTypes.object
 };
 
-//export default withRouter(SignIn);
+// export default withRouter(SignIn);
 export default SignIn;
