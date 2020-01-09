@@ -8,19 +8,25 @@ export default [
     childs: [
       {
         name: 'School Details',
-        path: Routes.ADMIN,
+        path: Routes.SCHOOL_DETAILS,
         icon: 'SupervisorAccount',
         childs: []
       },
       {
         name: 'Supplier',
-        path: Routes.NEW_MENU,
+        path: Routes.SUPPLIER,
         icon: 'SupervisorAccount',
         childs: []
       },
       {
         name: 'Student attendance',
-        path: Routes.ADMIN,
+        path: Routes.ATTENDANCE,
+        icon: 'SupervisorAccount',
+        childs: []
+      },
+      {
+        name: 'Items',
+        path: Routes.ITEMS,
         icon: 'SupervisorAccount',
         childs: []
       }

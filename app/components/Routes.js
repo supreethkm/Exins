@@ -10,6 +10,7 @@ import NewMenu from './Menu/New-Menu';
 import MenuPage from './Menu/Menu';
 import NewInventory from './Inventory/New-Inventory';
 import SignIn from './Sign-In/SignIn';
+import ItemsPage from './Items/Items-list';
 
 // Some folks find value in a centralized route config.
 // A route config is just data. React is great at mapping
@@ -22,6 +23,10 @@ const routesData = [
   {
     path: routes.ADMIN,
     component: SignIn
+  },
+  {
+    path: routes.ITEMS,
+    component: ItemsPage
   },
   {
     path: routes.NEW_MENU,

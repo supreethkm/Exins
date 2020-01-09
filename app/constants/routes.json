@@ -1,5 +1,9 @@
 {
   "ADMIN": "/admin",
+  "SCHOOL_DETAILS": "/school_details",
+  "ATTENDANCE": "/attendance",
+  "SUPPLIER": "/supplier",
+  "ITEMS": "/items",
   "FOOD_SERVICE": "/food-service",
   "FOOD_MENU" : "/food-service/menu",
   "NEW_MENU" : "/food-service/menu/new",

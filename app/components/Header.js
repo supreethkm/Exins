@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
+import routes from '../constants/routes.json';
 import Grid from '@material-ui/core/Grid';
 import HelpIcon from '@material-ui/icons/Help';
 import Hidden from '@material-ui/core/Hidden';
@@ -63,8 +63,8 @@ function Header(props) {
             </Hidden>
             <Grid item xs />
             <Grid item>
-              <Link className={classes.link} href="#" variant="body2">
-                Go to docs
+              <Link className={classes.link} href="#" variant="body2" to ={routes.SIGN_IN}>
+                Sign In
               </Link>
             </Grid>
             <Grid item>

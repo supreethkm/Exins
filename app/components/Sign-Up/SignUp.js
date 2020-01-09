@@ -15,9 +15,9 @@ import {
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import validate from 'validate.js';
 import { CompareArrowsOutlined } from '@material-ui/icons';
-import createDB from '../../database/admin';
+import { runChainExample } from '../../database/admin';
 
-createDB();
+runChainExample();
 
 const schema = {
   firstName: {
