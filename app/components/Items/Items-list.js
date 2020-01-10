@@ -2,6 +2,13 @@ import React, { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { makeStyles } from '@material-ui/styles';
 import {
@@ -44,7 +51,7 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'flex-end'
   },
   fab: {
-    position: 'absolute',
+    position: 'fixed',
     bottom: theme.spacing(2),
     right: theme.spacing(2)
   }
@@ -75,6 +82,21 @@ const ItemsData = [
     availableQuantity: 18
   }
 ];
+
+const newData = [
+  {
+    id: 3,
+    item: 'Jower',
+    issuedQuantity: 202.4,
+    availableQuantity: 15
+  },
+  {
+    id: 4,
+    item: 'Wheat',
+    issuedQuantity: 2.34,
+    availableQuantity: 18
+  }
+];
 const ItemsPage = props => {
   // const { className, items, ...rest } = props;
   const { className, ...rest } = props;
@@ -83,6 +105,7 @@ const ItemsPage = props => {
   const [selectedItems, setSelectedItems] = useState([]);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [page, setPage] = useState(0);
+  const [open, setOpen] = React.useState(false);
 
   const handleSelectAll = event => {
     // const { items } = props;
@@ -131,18 +154,29 @@ const ItemsPage = props => {
     props.history.push(Routes.NEW_MENU);
   };
 
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   useEffect(async () => {
+    console.log('useEffect');
     const readData = await readAllRows();
-      // .then((err, data) =>{
-      //   console.log('err : ', err, ' data: ', data);
-      //   return data;
-      // })
-      // .catch((err, data) => {
-      //   console.log('Catch err : ', err, ' data: ', data);
-      // });
+    // .then((err, data) =>{
+    //   console.log('err : ', err, ' data: ', data);
+    //   return data;
+    // })
+    // .catch((err, data) => {
+    //   console.log('Catch err : ', err, ' data: ', data);
+    // });
+    console.log('typeof readData: ', typeof readData);
     console.log('readData: ', readData);
     setItems(readData);
-  }, [Items]);
+    console.log('After setItems', Items);
+  }, []);
 
   return (
     <div>
@@ -159,7 +193,7 @@ const ItemsPage = props => {
                         color="primary"
                         indeterminate={
                           selectedItems.length > 0 &&
-                          selectedItems.length < items.length
+                          selectedItems.length < Items.length
                         }
                         onChange={handleSelectAll}
                       />
@@ -216,10 +250,38 @@ const ItemsPage = props => {
         color="primary"
         aria-label="add"
         className={classes.fab}
-        onClick={handleaddNewMenu}
+        onClick={handleClickOpen}
       >
         <AddIcon />
       </Fab>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="form-dialog-title"
+        maxWidth="sm"
+        fullWidth
+      >
+        <DialogTitle id="form-dialog-title">Add New Item</DialogTitle>
+        <DialogContent>
+          <DialogContentText>Add New Item to the Inventory</DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="itemName"
+            label="Item Name"
+            type="text"
+            fullWidth
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleClose} color="primary">
+            Add
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };

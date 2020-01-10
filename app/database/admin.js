@@ -17,7 +17,7 @@ function createDb() {
 function createTable() {
   log.log('createTable lorem');
   console.log('createTable lorem');
-  db.run('CREATE TABLE IF NOT EXISTS item (item TEXT)', insertRows);
+ // db.run('CREATE TABLE IF NOT EXISTS item (item TEXT)', insertRows);
 }
 
 function insertRows(err, data) {
