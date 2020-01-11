@@ -19,7 +19,10 @@ import {
   TablePagination
 } from '@material-ui/core';
 
-import { getInitials } from '../../../helpers';
+import { getInitials } from '../../../helpers/getInitials';
+import CreateExcelReport from '../../../helpers/Excel-Report';
+
+CreateExcelReport();
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -125,7 +128,7 @@ const DailyReport = props => {
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell padding="checkbox">
+                  {/* <TableCell padding="checkbox">
                     <Checkbox
                       checked={selectedItems.length === items.length}
                       color="primary"
@@ -135,30 +138,61 @@ const DailyReport = props => {
                       }
                       onChange={handleSelectAll}
                     />
+                    </TableCell> */}
+                  <TableCell rowSpan={2} align="center" variant="head">
+                    No.
                   </TableCell>
-                  <TableCell>Item</TableCell>
-                  <TableCell>Issued Quantity</TableCell>
-                  <TableCell>Available Quantity</TableCell>
-                  {/* <TableCell>Phone</TableCell>
-                  <TableCell>Registration date</TableCell> */}
+                  <TableCell rowSpan={2} align="center" variant="head">
+                    Item
+                  </TableCell>
+                  <TableCell colSpan={2} align="center" variant="head">
+                    Stock
+                  </TableCell>
+                  <TableCell colSpan={4} align="center" variant="head">
+                    Issued
+                  </TableCell>
+                  <TableCell rowSpan={2} align="center" variant="head">
+                    Remain
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell align="center" variant="head">
+                    Initial Stock
+                  </TableCell>
+                  <TableCell align="center" variant="head">
+                    Recieved Stock
+                  </TableCell>
+                  <TableCell align="center" variant="head">
+                    Morning
+                  </TableCell>
+                  <TableCell align="center" variant="head">
+                    Afternoon
+                  </TableCell>
+                  <TableCell align="center" variant="head">
+                    Evening
+                  </TableCell>
+                  <TableCell align="center" variant="head">
+                    Night
+                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {items.slice(0, rowsPerPage).map(item => (
+                {items.slice(0, rowsPerPage).map((item, idx) => (
                   <TableRow
                     className={classes.tableRow}
                     hover
                     key={item.id}
                     selected={selectedItems.indexOf(item.id) !== -1}
                   >
-                    <TableCell padding="checkbox">
+                    {/*   <TableCell padding="checkbox">
                       <Checkbox
                         checked={selectedItems.indexOf(item.id) !== -1}
                         color="primary"
                         onChange={event => handleSelectOne(event, item.id)}
                         value="true"
                       />
-                    </TableCell>
+                    </TableCell> */}
+                    <TableCell>{idx + 1}</TableCell>
                     <TableCell>
                       <div className={classes.nameContainer}>
                         {/*  <Avatar className={classes.avatar} src={item.avatarUrl}>
@@ -167,16 +201,13 @@ const DailyReport = props => {
                         <Typography variant="body1">{item.item}</Typography>
                       </div>
                     </TableCell>
-                    <TableCell>{item.issuedQuantity}</TableCell>
-                    <TableCell>{item.availableQuantity}</TableCell>
-                    {/*  <TableCell>
-                      {item.address.city}, {item.address.state},{' '}
-                      {item.address.country}
-                    </TableCell>
-                    <TableCell>{item.phone}</TableCell>
-                    <TableCell>
-                      {moment(item.createdAt).format('DD/MM/YYYY')}
-                    </TableCell> */}
+                    <TableCell>Initial Stock</TableCell>
+                    <TableCell>Recieved Stock</TableCell>
+                    <TableCell>Morning</TableCell>
+                    <TableCell>Afternoon</TableCell>
+                    <TableCell>Evening</TableCell>
+                    <TableCell>Night</TableCell>
+                    <TableCell>Remain</TableCell>
                   </TableRow>
                 ))}
               </TableBody>

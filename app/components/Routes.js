@@ -11,6 +11,8 @@ import MenuPage from './Menu/Menu';
 import NewInventory from './Inventory/New-Inventory';
 import SignIn from './Sign-In/SignIn';
 import ItemsPage from './Items/Items-list';
+import SchoolDetailsPage from './School-Details/SchoolDetails.js';
+import SupplierPage from './Supplier/Supplier.js';
 
 // Some folks find value in a centralized route config.
 // A route config is just data. React is great at mapping
@@ -23,6 +25,14 @@ const routesData = [
   {
     path: routes.ADMIN,
     component: SignIn
+  },
+  {
+    path: routes.SCHOOL_DETAILS,
+    component: SchoolDetailsPage
+  },
+  {
+    path: routes.SUPPLIER,
+    component: SupplierPage
   },
   {
     path: routes.ITEMS,
@@ -53,12 +63,16 @@ const routesData = [
     component: MonthlyReport
   },
   {
-    path: routes.LOGIN,
-    component: Bus
+    path: routes.SIGN_IN,
+    component: SignIn
   },
   {
-    path: routes.LOGOUT,
-    component: Bus
+    path: routes.SIGN_OUT,
+    component: SignUp
+  },
+  {
+    path: routes.SIGN_UP,
+    component: SignUp
   },
   {
     path: routes.NOT_FOUND_404,

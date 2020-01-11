@@ -19,12 +19,6 @@ export default [
         childs: []
       },
       {
-        name: 'Student attendance',
-        path: Routes.ATTENDANCE,
-        icon: 'SupervisorAccount',
-        childs: []
-      },
-      {
         name: 'Items',
         path: Routes.ITEMS,
         icon: 'SupervisorAccount',

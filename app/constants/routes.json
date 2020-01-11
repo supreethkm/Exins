@@ -14,5 +14,6 @@
   "MONTHLY_REPORT": "/reports/monthly",
   "SIGN_IN": "/sign-in",
   "SIGN_OUT": "/sign-out",
+  "SIGN_UP": "/sign-up",
   "NOT_FOUND": "/not-found"
 }
